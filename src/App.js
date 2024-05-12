@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import Box from '@mui/material/Box';
+import SideNav from './Components/SideNav';
+import Dashboard from './Pages/Dashboard';
+import Portfolio from './Pages/Portfolio';
+import AppBar from '@mui/material/AppBar';
+import CssBaseline from '@mui/material/CssBaseline';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <><SideNav /><Dashboard /></>,
+  },
+  {
+    path: '/portfolio',
+    element: <><SideNav /><Portfolio /></>,
+  }
+]);
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+          <Toolbar>
+            <Typography variant="h6" noWrap component="div">
+              My Market Place
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <RouterProvider router={router} />
+      </Box>
     </div>
   );
 }
